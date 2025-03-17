@@ -21,7 +21,8 @@ public class ImageRepository implements APIClientRepository {
 
     public String getImage(MovieDTO movie) throws IOException, InterruptedException {
         String baseURL = "https://openapi.naver.com/v1/search/image";
-        String query = URLEncoder.encode("%s 포스터 %s".formatted(movie.name(), movie.openDate().substring(0, 4)), StandardCharsets.UTF_8);
+        String query = URLEncoder.encode("%s 포스터".formatted(movie.name()),
+                StandardCharsets.UTF_8);
         String url = "%s?query=%s&display=1".formatted(baseURL, query);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
