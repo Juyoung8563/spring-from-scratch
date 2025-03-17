@@ -17,12 +17,7 @@ public class MovieRepository implements APIClientRepository {
     final String key = dotenv.get("MOVIE_KEY");
 
     public String callAPI(MovieParam param, String url, String action, String format) throws Exception {
-//        String action = "searchDailyBoxOfficeList";
-//        String format = "json";
-//        String url = "%s/%s.%s?key=%s&targetDt=%s"
-//                .formatted(baseURL, action, format, key, param.targetDate());
         HttpRequest request = HttpRequest.newBuilder()
-                // targetDt : yyyymmdd
                 .uri(URI.create(url.formatted(
                         baseURL, action, format, key, param.targetDate())))
                 .GET()
