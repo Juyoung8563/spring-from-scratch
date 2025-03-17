@@ -34,28 +34,35 @@ body {
     font-family: 'MaruBuri', serif;
     background-color: #EEEEEE;
     color: #222831;
+    overflow-x: hidden;
 }
 
+/* 카드 스타일 및 애니메이션 */
 .card {
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     height: 100%;
     border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0.8;
+}
+
+.movie-card {
+    transition: all 0.4s ease;
+}
+
+.movie-card.show {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-}
-
-.movie-rank {
-    display: inline-block;
-    background-color: #00ADB5;
-    color: white;
-    border-radius: 4px;
-    padding: 3px 8px;
-    font-family: 'MaruBuriBold', serif;
-    margin-right: 8px;
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    z-index: 2;
 }
 
 .movie-title {
@@ -64,64 +71,132 @@ body {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    color: #222831;
+    transition: color 0.3s ease;
+}
+
+.card:hover .movie-title {
+    color: #00ADB5;
 }
 
 .movie-info {
     font-family: 'MaruBuriLight', serif;
     font-size: 0.9rem;
     color: #393E46;
+    margin-bottom: 0.7rem;
 }
 
 .movie-audience {
     font-family: 'MaruBuriSemiBold', serif;
     color: #00ADB5;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 173, 181, 0.2);
 }
 
+.audience-number {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #00ADB5;
+}
+
+/* 추천 섹션 */
 .recommendation-section {
-    background-color: #393E46;
+    background: linear-gradient(135deg, #2c3440 0%, #393E46 100%);
     color: #EEEEEE;
-    border-radius: 10px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 30px;
     margin-top: 30px;
     margin-bottom: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.recommendation-section::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 173, 181, 0.1);
+    border-radius: 50%;
+    z-index: 0;
 }
 
 .recommendation-title {
     font-family: 'MaruBuriBold', serif;
     color: #00ADB5;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border-bottom: 2px solid #00ADB5;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .recommendation-content {
     font-family: 'MaruBuri', serif;
     line-height: 1.8;
     white-space: pre-line;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* 헤더 */
 .header {
-    background: #222831;
+    background: linear-gradient(135deg, #1a1e25 0%, #222831 100%);
     color: #EEEEEE;
-    padding: 40px 0;
+    padding: 50px 0;
     margin-bottom: 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #00ADB5 0%, #4ECDC4 100%);
 }
 
 .header h1 {
     font-family: 'MaruBuriBold', serif;
     color: #00ADB5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 2.8rem;
+    letter-spacing: 0.5px;
 }
 
 .header p {
     font-family: 'MaruBuriLight', serif;
     opacity: 0.9;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 10px;
 }
 
+/* 배지 스타일 */
 .badge {
     margin-right: 5px;
     margin-bottom: 5px;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    transform: translateY(-2px);
 }
 
 .badge-genre {
@@ -142,28 +217,53 @@ body {
     color: #EEEEEE !important;
 }
 
+/* 푸터 */
 footer {
-    background-color: #222831;
+    background: linear-gradient(135deg, #1a1e25 0%, #222831 100%);
     color: #EEEEEE;
-    padding: 20px 0;
-    margin-top: 40px;
+    padding: 30px 0;
+    margin-top: 60px;
     font-family: 'MaruBuriLight', serif;
+    position: relative;
 }
 
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #00ADB5 0%, #4ECDC4 100%);
+}
+
+/* 섹션 타이틀 */
 .section-title {
     color: #222831;
     font-family: 'MaruBuriBold', serif;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     border-left: 5px solid #00ADB5;
     padding-left: 15px;
+    font-size: 1.8rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #00ADB5;
 }
 
 /* 포스터 이미지 관련 스타일 */
 .movie-poster-container {
-    height: 280px;
+    height: 320px;
     position: relative;
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
+    border-radius: 10px 10px 0 0;
     background-color: #222831;
 }
 
@@ -172,45 +272,170 @@ footer {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
 }
 
 .card:hover .movie-poster {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .movie-rank-overlay {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 15px;
+    left: 15px;
     background-color: #00ADB5;
     color: white;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'MaruBuriBold', serif;
     font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.card:hover .movie-rank-overlay {
+    transform: scale(1.1) rotate(-10deg);
+    background-color: #222831;
+}
+
+/* 포스터 오버레이 정보 */
+.movie-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%);
+    padding: 20px 15px 15px;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.card:hover .movie-info-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.movie-overlay-title {
+    font-family: 'MaruBuriSemiBold', serif;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.movie-overlay-audience {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+}
+
+.movie-audience-count {
+    background: rgba(0, 173, 181, 0.8);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-family: 'MaruBuriSemiBold', serif;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+    .header h1 {
+        font-size: 2.3rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .movie-poster-container {
+        height: 280px;
+    }
 }
 
 @media (max-width: 768px) {
     .header {
-        padding: 20px 0;
+        padding: 30px 0;
     }
 
     .movie-title {
         font-size: 1rem;
-        min-height: 40px;
     }
 
     .recommendation-section {
-        padding: 15px;
+        padding: 20px;
+    }
+
+    .movie-poster-container {
+        height: 250px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .movie-rank-overlay {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 2rem;
     }
 
     .movie-poster-container {
         height: 220px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+}
+
+/* 애니메이션 효과 추가 */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 추가 효과를 위한 유틸리티 클래스 */
+.shadow-hover {
+    transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
     }
 }
