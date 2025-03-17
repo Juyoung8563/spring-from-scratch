@@ -32,7 +32,7 @@ public class MovieRepository implements APIClientRepository {
         String url = "%s/%s.%s?key=%s&movieCd=%s".formatted(
                 baseURL, action, format, key, movie.code());
         String responseBody = callAPI(url);
-        System.out.println(responseBody);
+//        System.out.println(responseBody);
         MovieInfoResponse movieInfoResponse = objectMapper.readValue(responseBody, MovieInfoResponse.class);
         MovieInfoResponse.MovieInfo info =
                 movieInfoResponse.movieInfoResult().movieInfo();
