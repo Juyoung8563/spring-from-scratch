@@ -4,7 +4,6 @@
     <title>영화 추천</title>
 </head>
 <body>
-  <p>미키17</p>
-  <p>콘클라베</p>
+    <p><%= request.getAttribute("movies") %></p>
 </body>
 </html>
