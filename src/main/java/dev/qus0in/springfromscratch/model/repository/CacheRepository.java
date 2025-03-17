@@ -3,6 +3,7 @@ package dev.qus0in.springfromscratch.model.repository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.qus0in.springfromscratch.model.dto.MovieCacheDTO;
 import dev.qus0in.springfromscratch.model.dto.MovieCacheResponse;
+import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,6 +11,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+@Repository
 public class CacheRepository implements APIClientRepository {
     final String baseURL = dotenv.get("SUPABASE_URL");
     final String key = dotenv.get("SUPABASE_KEY");

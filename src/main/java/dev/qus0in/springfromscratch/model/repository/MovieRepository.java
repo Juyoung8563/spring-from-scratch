@@ -3,7 +3,6 @@ package dev.qus0in.springfromscratch.model.repository;
 import dev.qus0in.springfromscratch.model.dto.*;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -26,7 +25,7 @@ public class MovieRepository implements APIClientRepository {
         throw new RuntimeException("Failed : HTTP error code : " + response.statusCode());
     }
 
-    public MovieInfoDTO getMovieInfo(MovieDTO movie) throws Exception {
+    public MovieInfoDTO getMovieInfo(MovieDTO movie, String imageUrl) throws Exception {
         String action = "movie/searchMovieInfo";
         String format = "json";
         String url = "%s/%s.%s?key=%s&movieCd=%s".formatted(
@@ -41,7 +40,8 @@ public class MovieRepository implements APIClientRepository {
                 info.genres().stream().map(MovieInfoResponse.Genre::genreNm).toList(),
                 info.directors().stream().map(MovieInfoResponse.Director::peopleNm).toList(),
                 info.actors().stream().map(MovieInfoResponse.Actor::peopleNm).toList(),
-                Long.parseLong(info.showTm())
+                Long.parseLong(info.showTm()),
+                imageUrl
             );
     }
 

@@ -8,5 +8,6 @@ public record MovieInfoDTO (
         List<String> genres,
         List<String> directors,
         List<String> actors,
-        long time
+        long time,
+        String imgUrl
 ) { }

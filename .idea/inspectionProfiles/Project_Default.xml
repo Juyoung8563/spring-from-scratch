@@ -5,6 +5,8 @@
       <option name="customHeaders">
         <set>
           <option value="apikey" />
+          <option value="X-Naver-Client-Id" />
+          <option value="X-Naver-Client-Secret" />
         </set>
       </option>
     </inspection_tool>
