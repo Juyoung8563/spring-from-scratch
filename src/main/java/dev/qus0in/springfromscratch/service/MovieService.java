@@ -1,6 +1,7 @@
 package dev.qus0in.springfromscratch.service;
 
 import dev.qus0in.springfromscratch.model.dto.MovieDTO;
+import dev.qus0in.springfromscratch.model.dto.MovieInfoDTO;
 import dev.qus0in.springfromscratch.model.dto.MovieParam;
 import dev.qus0in.springfromscratch.model.repository.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,15 @@ public class MovieService {
         String nowDateStr = nowDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         MovieParam param = new MovieParam(nowDateStr);
         return movieRepository.getMovies(param);
+    }
+
+    public List<MovieInfoDTO> getMovieInfos() throws Exception {
+        return getMovies().stream().map((v) -> {
+            try {
+                return movieRepository.getMovieInfo(v);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
     }
 }
